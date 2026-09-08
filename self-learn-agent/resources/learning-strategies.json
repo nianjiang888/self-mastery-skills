@@ -1,0 +1,102 @@
+{
+  "version": "2.0.0",
+  "description": "学习策略库：self-learn-agent 在消化与复习时调用的策略清单，每条均绑定可核验理论出处。",
+  "strategies": [
+    {
+      "id": "chunking",
+      "name": "组块化",
+      "trigger": "ingest",
+      "how": "把零散信息压缩成有意义的'组块'，降低工作记忆占用。",
+      "theory": "Miller (1956) 工作记忆容量 7±2 个组块；Sweller 认知负荷理论（1988）",
+      "evidence": "组块化能将陌生信息转为熟悉单元，显著减少内在认知负荷。"
+    },
+    {
+      "id": "spaced-repetition",
+      "name": "间隔重复",
+      "trigger": "review",
+      "how": "按遗忘曲线递增间隔复习，而非一次性突击。",
+      "theory": "Ebbinghaus (1885) 遗忘曲线；Cepeda et al. (2006) 254 项研究元分析；Karpicke & Roediger (2008)",
+      "evidence": "间隔效应是心理学最稳健的发现之一，长间隔优于短间隔（在合理范围内）。"
+    },
+    {
+      "id": "retrieval-practice",
+      "name": "主动回忆 / 测试效应",
+      "trigger": "quiz",
+      "how": "合上资料凭回忆提取，而非重读。",
+      "theory": "Karpicke & Roediger (2008) 提取练习效应；Roediger & Karpicke (2006)",
+      "evidence": "测试效应：主动提取比重复阅读留存高得多（Karpicke 实验 80% vs 36%）。"
+    },
+    {
+      "id": "elaborative-interrogation",
+      "name": "精细质询",
+      "trigger": "elaborate",
+      "how": "对知识自问'为什么成立''如何应用''与什么相关'。",
+      "theory": "Pressley et al. (1987)；Dunlosky et al. (2013) 评为中等效用策略",
+      "evidence": "通过生成解释加深理解，与自我解释（Chi et al. 1994）互补。"
+    },
+    {
+      "id": "generative-learning",
+      "name": "生成式学习",
+      "trigger": "ingest",
+      "how": "用自己的话总结、画图、教别人、自我测试，而非被动接收。",
+      "theory": "Fiorella & Mayer (2015) 八策略；Mayer 多媒体学习认知理论（CTML）",
+      "evidence": "生成活动（summarizing/mapping/drawing/teaching）促进意义建构。"
+    },
+    {
+      "id": "interleaving",
+      "name": "交错练习",
+      "trigger": "interleave",
+      "how": "混合不同主题/题型练习，而非同类集中刷。",
+      "theory": "Rohrer (2012, Educational Psychology Review 24(3):355-367)；Rohrer & Taylor (2007)",
+      "evidence": "交错练习短期表现略低但长期迁移更强，迫使辨别不同解法。"
+    },
+    {
+      "id": "metacognitive-monitoring",
+      "name": "元认知监控",
+      "trigger": "review",
+      "how": "用知晓感（FOK）校准'我真的会了吗'，避免能力错觉。",
+      "theory": "Koriat (1993) 可达性模型；Hart (1965)；Dunlosky & Bjork '能力错觉'",
+      "evidence": "测试能暴露虚假熟悉，校准判断比重读更有效。"
+    },
+    {
+      "id": "cognitive-load-management",
+      "name": "认知负荷管理",
+      "trigger": "ingest",
+      "how": "用样例、去冗余、先整体后细节，降低外在负荷。",
+      "theory": "Sweller (1988) 认知负荷理论；样例效应 worked-example；专长逆转效应",
+      "evidence": "减少无关负荷、投资关联负荷以建构图式自动化。"
+    },
+    {
+      "id": "dual-coding",
+      "name": "双重编码",
+      "trigger": "ingest",
+      "how": "同时用文字与图像表征同一概念。",
+      "theory": "Paivio (1971, 1986) 双重编码理论",
+      "evidence": "言语+表象双通道编码，提取线索翻倍，记忆更牢。"
+    },
+    {
+      "id": "desirable-difficulty",
+      "name": "可取难度",
+      "trigger": "quiz",
+      "how": "主动增加提取难度（如延后测试、交错），换取更牢记忆。",
+      "theory": "Bjork & Bjork (1992, 2011) 可取难度理论",
+      "evidence": "越'费力'的成功提取，长期留存越好；流畅≠学会。"
+    },
+    {
+      "id": "feynman",
+      "name": "费曼技巧",
+      "trigger": "elaborate",
+      "how": "用最朴素语言向小白讲清楚，卡住处即盲区。",
+      "theory": "衍生自 Feynman；与自我解释（Chi et al. 1994）同源",
+      "evidence": "讲解迫使生成连贯表征，暴露概念漏洞。"
+    },
+    {
+      "id": "deliberate-practice",
+      "name": "刻意练习",
+      "trigger": "interleave",
+      "how": "在舒适区边缘、有反馈、重复聚焦弱项。",
+      "theory": "Ericsson et al. (1993, Psychological Review)",
+      "evidence": "专家级掌握来自有目标、有反馈的高强度针对性练习。"
+    }
+  ]
+}

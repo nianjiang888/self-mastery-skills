@@ -1,0 +1,171 @@
+{
+  "version": "2.0.1",
+  "description": "self-protect-agent 红线规则库。每条规则由确定性代码判断，不靠模型自觉。",
+  "allowlist": [
+    "git", "ls", "cat", "echo", "python", "python3", "pip", "pip3",
+    "npm", "node", "mkdir", "cp", "mv", "head", "tail", "grep", "wc",
+    "cd", "pwd", "touch", "jq", "curl", "wget", "sort", "uniq", "awk", "sed"
+  ],
+  "rules": [
+    {
+      "id": "RL-DELETE-RF",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "rm\\s+-rf",
+      "desc": "递归强制删除，极易误删整个目录树"
+    },
+    {
+      "id": "RL-DROP-TABLE",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "drop\\s+table",
+      "desc": "删除整张表，不可逆"
+    },
+    {
+      "id": "RL-TRUNCATE",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "truncate\\s+table",
+      "desc": "清空整张表，不可逆"
+    },
+    {
+      "id": "RL-FORMAT-DISK",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "(mkfs|format)\\s+",
+      "desc": "格式化磁盘，数据全毁"
+    },
+    {
+      "id": "RL-KILL-ALL",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "kill\\s+(-9\\s+)?-1|pkill\\s+-9|pkill\\s+-f\\s+.",
+      "desc": "杀掉所有/大范围进程，可能拖垮系统"
+    },
+    {
+      "id": "RL-DELETE-FROM",
+      "level": "warn",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "delete\\s+from\\s+\\w+",
+      "desc": "DELETE 语句，需确认是否带 WHERE（无 WHERE = 全表删）"
+    },
+    {
+      "id": "RL-INFRA-DESTROY",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "terraform\\s+destroy|kubectl\\s+delete\\s+(ns|namespace|all)",
+      "desc": "销毁基础设施/整个命名空间，不可逆"
+    },
+    {
+      "id": "RL-FORCE-PUSH",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "git\\s+push\\s+(-f|--force)",
+      "desc": "强制推送会覆盖远程历史，他人提交可能丢失"
+    },
+    {
+      "id": "RL-RESET-HARD",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "git\\s+reset\\s+--hard",
+      "desc": "丢弃本地所有未提交修改"
+    },
+    {
+      "id": "RL-SUDO-SU",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "\\bsudo\\b|\\bsu\\b",
+      "desc": "提权操作，爆炸半径扩大"
+    },
+    {
+      "id": "RL-CHMOD-777",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "chmod\\s+777",
+      "desc": "过度宽松权限，任何人都可写，安全隐患"
+    },
+    {
+      "id": "RL-DOCKER-PRIV",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "docker\\s+run\\s+.*(--privileged|-v\\s+/:)",
+      "desc": "特权容器或挂载宿主根目录，等于把机器交给容器"
+    },
+    {
+      "id": "RL-SECRET-READ",
+      "level": "warn",
+      "category": "external_send",
+      "match": "regex",
+      "pattern": "(cat|less|vim|nano)\\s+.*\\.(env|pem|key|keystore|p12)",
+      "desc": "读取密钥/凭据文件，下一步可能外发"
+    },
+    {
+      "id": "RL-CURL-PIPE",
+      "level": "warn",
+      "category": "external_send",
+      "match": "regex",
+      "pattern": "curl\\s+.*\\|\\s*(sh|bash)|wget\\s+.*(\\||;)\\s*(sh|bash)",
+      "desc": "管道下载即执行（含 wget），供应链攻击经典入口"
+    },
+    {
+      "id": "RL-FORK-BOMB",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": ":\\(\\s*\\)\\s*\\{\\s*:\\s*\\|\\s*:\\s*&\\s*\\}\\s*;\\s*:",
+      "desc": "fork bomb，瞬间耗尽进程表拖垮系统"
+    },
+    {
+      "id": "RL-DROP-DB",
+      "level": "block",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "drop\\s+database",
+      "desc": "删除整个数据库，不可逆"
+    },
+    {
+      "id": "RL-GIT-CLEAN",
+      "level": "warn",
+      "category": "destructive",
+      "match": "regex",
+      "pattern": "git\\s+clean\\s+-f",
+      "desc": "强制清除未跟踪文件，可能删掉未提交的重要工作"
+    },
+    {
+      "id": "RL-CHMOD-000",
+      "level": "warn",
+      "category": "privilege",
+      "match": "regex",
+      "pattern": "chmod\\s+000",
+      "desc": "权限清零，自己也会被锁在门外"
+    },
+    {
+      "id": "RL-PROMPT-INJECT",
+      "level": "warn",
+      "category": "prompt_injection",
+      "match": "regex",
+      "pattern": "(ignore\\s+(previous|prior|all)\\s+(instructions|prompts)|disregard\\s+(above|previous|earlier))",
+      "desc": "提示注入特征串，外部数据可能在诱导服从"
+    },
+    {
+      "id": "RL-DYN-EVAL",
+      "level": "info",
+      "category": "external_send",
+      "match": "regex",
+      "pattern": "\\beval\\(|\\bexec\\(",
+      "desc": "动态执行，谨慎确认来源可信"
+    }
+  ]
+}

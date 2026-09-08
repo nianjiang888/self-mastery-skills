@@ -1,0 +1,33 @@
+{
+  "name": "fitness-domains",
+  "version": "2.0.0",
+  "desc": "引擎指标定义与计算口径。",
+  "metrics": {
+    "session_load": "单次训练压力分；见 training-models.session_load。",
+    "tonnage": "力量训练总吨位 = 组×次×重量（kg·次）。",
+    "acwr": "急性:慢性负荷比，见 training-models.acwr。",
+    "monotony": "训练单调性，高=刺激单一。",
+    "strain": "紧张度 = 单调性 × 周负荷。",
+    "weekly_freq": "近窗口内记录次数折算的每周频次。",
+    "part_share": "各部位出现次数占近期总部位数的比例，最高者用于过度使用判定。",
+    "recovery_score": "由 ACWR/单调性/前夜睡眠/酸痛估算的 0-100 恢复分。",
+    "rpe": "主观用力评分 1-10（Borg CR10 简化）。",
+    "zone": "心率区间 1-5（可选录入）。"
+  },
+  "weak_spot_rules": {
+    "acwr_high": ">1.5 高严重度",
+    "acwr_low": "<0.8 中严重度（退练）",
+    "monotony_high": ">2.0 中严重度",
+    "overuse": "单部位占比 >0.6 高严重度",
+    "low_freq": "周频次 < 目标频次 中严重度",
+    "poor_recovery_sleep": "前夜睡眠均值 <6 中严重度",
+    "poor_recovery_sore": "酸痛均值 >6 中严重度",
+    "no_recovery_day": "近7天无低强度/柔韧训练 低严重度"
+  },
+  "exit_codes": {
+    "0": "正常",
+    "1": "存在弱项或高风险（risk 仅高严重度才返回1）",
+    "2": "未知子命令",
+    "4": "参数错误/引擎异常"
+  }
+}

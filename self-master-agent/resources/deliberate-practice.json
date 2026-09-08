@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "name": "deliberate-practice",
+  "description": "刻意练习的核心原则库，支撑 self-master-agent 的 drill/measure 子命令设计实战。",
+  "principles": [
+    {
+      "id": "dp-1",
+      "name": "明确目标",
+      "en": "Specific Goal",
+      "desc": "每次练习针对一个具体可观测的弱点，而非『练一练』。",
+      "source": "Ericsson, Krampe & Tesch-Romer (1993, Psychological Review 100(3):363-406)。"
+    },
+    {
+      "id": "dp-2",
+      "name": "超出舒适区",
+      "en": "Beyond Comfort Zone",
+      "desc": "只在刚好够不着的难度上练才长进；太易无收益，太难易挫败。",
+      "source": "Ericsson et al. (1993)；与 Csikszentmihalyi (1990) 心流通道（挑战≈技能）互补。"
+    },
+    {
+      "id": "dp-3",
+      "name": "即时反馈",
+      "en": "Immediate Feedback",
+      "desc": "练完立刻知道对错，否则大脑会巩固错误。",
+      "source": "Ericsson (2006, The Cambridge Handbook of Expertise)；Bjork (1994) 提取反馈价值。"
+    },
+    {
+      "id": "dp-4",
+      "name": "高度专注",
+      "en": "Focused Attention",
+      "desc": "分心的练习近似无效；单位时间质量 > 时长。",
+      "source": "Ericsson (1993)；与自我损耗、注意力研究一致。"
+    },
+    {
+      "id": "dp-5",
+      "name": "可重复与累积",
+      "en": "Repetition & Accumulation",
+      "desc": "技能经由『力量法则（练习曲线）』逐步自动化，需大量高质量重复。",
+      "source": "Anderson (1982, 1987) ACT-R 程序性知识习得；Newell & Rosenbloom (1981) 练习的幂律。"
+    },
+    {
+      "id": "dp-6",
+      "name": "真实情境",
+      "en": "Real Context",
+      "desc": "在接近实战的情境中检验，才能保证迁移（近迁移/远迁移）。",
+      "source": "Salomon & Perkins (1989) 迁移的高通路/低通路；Thorndike (1901) 相同要素说。"
+    },
+    {
+      "id": "dp-7",
+      "name": "元认知监控",
+      "en": "Metacognitive Monitoring",
+      "desc": "持续校准『我以为我会』与『我实际会』的差距，避免能力错觉。",
+      "source": "Koriat (1993) 知晓感的可及性模型；Dunlosky & Bjork (2008) 能力错觉。"
+    },
+    {
+      "id": "dp-8",
+      "name": "成长型信念",
+      "en": "Growth Mindset",
+      "desc": "相信能力可塑，把挫折当信息而非能力上限，决定能否坚持到登顶。",
+      "source": "Dweck (2006, Mindset: The New Psychology of Success)。"
+    }
+  ],
+  "volume_benchmarks": [
+    {"claim": "一万小时法则", "note": "Gladwell (2008) 普及；Ericsson 原研究为『约十年高质量刻意练习』，且质量>时长。", "source": "Ericsson (1993); Gladwell (2008, Outliers)。"},
+    {"claim": "十年法则", "note": "多领域顶尖者普遍需约十年专业投入。", "source": "Simon & Chase (1973) 国际象棋；Bloom (1985) 天赋研究。"},
+    {"claim": "每日最低剂量", "note": "Ericsson 观察顶尖演奏者每日专注练习常超 3-4 小时，且分段。", "source": "Ericsson et al. (1993)。"}
+  ]
+}

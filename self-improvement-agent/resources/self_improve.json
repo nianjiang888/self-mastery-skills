@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "id_format": "TYPE-YYYYMMDD-XXX",
+  "types": {
+    "LRN": "learning",
+    "ERR": "error",
+    "FEAT": "feature"
+  },
+  "categories": {
+    "correction": "用户纠正了我",
+    "insight": "更好的做法",
+    "knowledge_gap": "我知识过时/不懂",
+    "best_practice": "值得推广的实践"
+  },
+  "priorities": ["low", "medium", "high", "critical"],
+  "areas": ["frontend", "backend", "infra", "tests", "docs", "config"],
+  "statuses": ["pending", "in_progress", "resolved", "promoted", "promoted_to_skill", "wont_fix"],
+  "promotion_rules": {
+    "recurrence_threshold": 3,
+    "distinct_tasks": 2,
+    "window_days": 30,
+    "fast_track": {
+      "priority": "critical",
+      "user_says": "记进 CLAUDE.md"
+    },
+    "targets": {
+      "convention": "CLAUDE.md",
+      "workflow": "AGENTS.md",
+      "behavior": "SOUL.md",
+      "copilot": ".github/copilot-instructions.md"
+    }
+  },
+  "extraction_criteria": {
+    "see_also_links": 2,
+    "status": "resolved",
+    "broadly_applicable": true,
+    "user_flagged": "存成技能"
+  },
+  "notify": {
+    "channels": ["feishu", "dingtalk", "wecom"],
+    "config_key": "webhook",
+    "env_key": "SELF_IMPROVE_WEBHOOK",
+    "push": "errors_daily_summary",
+    "rule": "脱敏摘要，不推密钥/完整路径"
+  },
+  "red_lines": [
+    "不记密钥/token/私钥/环境变量/完整源码",
+    "不覆盖已有 .learnings/ 文件",
+    "不臆造未发生纠错或功能请求",
+    "升级前确认目标文件可写"
+  ],
+  "chinese_dev_context": {
+    "paths_example": "D:/项目",
+    "pkg_manager_default": "pnpm",
+    "git_aliases": {"gst": "status", "gp": "push", "gc": "commit"}
+  }
+}

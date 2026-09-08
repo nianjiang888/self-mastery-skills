@@ -1,0 +1,54 @@
+{
+  "name": "money-models",
+  "version": "2.0.0",
+  "desc": "引擎内部使用的金钱心理与财务模型库（计算口径、出处）。",
+  "save_rate": {
+    "name": "储蓄率",
+    "formula": "(收入 - 支出) / 收入 × 100%",
+    "benchmark": "≥20% 健康；10-20% 及格；<10% 警戒",
+    "note": "Warren & Tyagi 2005, All Your Worth。"
+  },
+  "fifty_thirty_twenty": {
+    "name": "50/30/20 法则",
+    "formula": "必需 ≤50% / 想要 ≤30% / 储蓄 ≥20%",
+    "note": "Warren & Tyagi 2005。"
+  },
+  "emergency_cover": {
+    "name": "应急金覆盖月数",
+    "formula": "应急金余额 / 折算月支出",
+    "benchmark": "≥3 个月达标；<1 个月高危",
+    "note": "美联储家庭经济福祉调查（2019）显示应急缓冲普遍不足。"
+  },
+  "fixed_share": {
+    "name": "固定支出占比",
+    "formula": "固定类支出 / 总支出 × 100%",
+    "benchmark": "≤50%",
+    "note": "与 50/30/20 必需上限一致。"
+  },
+  "volatility": {
+    "name": "日支出变异系数",
+    "formula": "日支出标准差 / 日支出均值",
+    "high": ">0.8 说明有大额冲动消费",
+    "note": "工程近似，用于识别冲动消费，非标准金融指标。"
+  },
+  "mental_accounting": {
+    "name": "心理账户",
+    "desc": "人会把钱按来源/用途分袋，破坏资金的可替代性",
+    "note": "Thaler 1985, Mark Sci 4:199-214。"
+  },
+  "pain_of_paying": {
+    "name": "支付痛感",
+    "desc": "现金支付痛感最强，刷卡/扫码/先买后付削弱痛感、放大消费",
+    "note": "Prelec & Loewenstein 1998, Mark Sci 17:4-28；Feinberg 1986, J Consum Res 12:348-356。"
+  },
+  "hyperbolic_discounting": {
+    "name": "双曲贴现",
+    "desc": "对即时回报过度偏好，导致'下个月再开始存'无限循环",
+    "note": "Laibson 1997, Q J Econ 112:443-477。"
+  },
+  "save_more_tomorrow": {
+    "name": "明天存更多",
+    "desc": "把储蓄提升绑定到未来涨薪时点，用惯性克服现时偏误",
+    "note": "Thaler & Benartzi 2004, J Polit Econ 112:S164-S187。"
+  }
+}

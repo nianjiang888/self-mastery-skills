@@ -1,0 +1,38 @@
+{
+  "name": "budget-guidelines",
+  "version": "2.0.0",
+  "desc": "分目标的储蓄/支出结构/应急金/预算规则，均带可核验出处。",
+  "rules": {
+    "50_30_20": {
+      "desc": "税后收入分三份：必需 ≤50%、想要 ≤30%、储蓄/还债 ≥20%",
+      "note": "Warren E, Tyagi A. All Your Worth: The Ultimate Lifetime Money Plan. Free Press; 2005."
+    },
+    "emergency_fund": {
+      "desc": "先备 1 个月，再补到 3-6 个月开支；优先级高于投资",
+      "note": "美联储家庭经济福祉报告显示相当比例家庭拿不出小额应急金（Board of Governors of the Federal Reserve System. Report on the Economic Well-Being of U.S. Households. 2019）。"
+    },
+    "save_rate": {
+      "desc": "储蓄率是财务健康最核心的单一指标；低于 10% 视为警戒",
+      "note": "与 50/30/20 的 20% 储蓄线一致（Warren & Tyagi 2005）。"
+    },
+    "fixed_expense": {
+      "desc": "固定支出占比建议 ≤50%，过高会削弱抗风险能力",
+      "note": "与 50/30/20 的必需上限一致（Warren & Tyagi 2005）。"
+    },
+    "automation": {
+      "desc": "用制度代替意志力：发薪日自动转出、涨薪时自动提高储蓄额",
+      "note": "Thaler RH, Benartzi S. Save more tomorrow. J Polit Econ. 2004;112(S1):S164-S187."
+    },
+    "cooling_off": {
+      "desc": "大额非必需消费设 24 小时冷静期，对冲冲动与支付痛感钝化",
+      "note": "Prelec D, Loewenstein G. The red and the black. Mark Sci. 1998;17(1):4-28；Feinberg RA. Credit cards as spending facilitating stimuli. J Consum Res. 1986;12(3):348-356."
+    }
+  },
+  "behavioural_traps": [
+    {"name": "心理账户", "desc": "把钱按来源/用途分袋，导致该省的不省", "note": "Thaler RH. Mental accounting and consumer choice. Mark Sci. 1985;4(3):199-214."},
+    {"name": "双曲贴现", "desc": "过度偏好眼前满足，储蓄计划一再推迟", "note": "Laibson D. Golden eggs and hyperbolic discounting. Q J Econ. 1997;112(2):443-477."},
+    {"name": "沉没成本", "desc": "因为已花钱而继续投入（如闲置会员、烂尾项目）", "note": "Arkes HR, Blumer C. The psychology of sunk cost. Organ Behav Hum Decis Process. 1985;35(1):124-140."},
+    {"name": "锚定效应", "desc": "第一个价格成为参照，'打折'感觉便宜", "note": "Tversky A, Kahneman D. Judgment under uncertainty. Science. 1974;185(4157):1124-1131."},
+    {"name": "享乐适应", "desc": "收入上涨后欲望同步上涨，永远不够", "note": "Brickman P, Campbell DT. Hedonic relativism and planning the good society. 1971；Easterlin RA. 1974."}
+  ]
+}

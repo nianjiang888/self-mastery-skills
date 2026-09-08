@@ -1,0 +1,23 @@
+{
+  "_comment": "display_name 覆盖表。自动从 description 抽取的第一语义单元不理想时，在这里手工指定。publish_series.py 会读取本文件。",
+  "self-budget-agent": "个人记账与存钱",
+  "self-communicate-agent": "沟通表达复盘",
+  "self-create-agent": "创作产出",
+  "self-debug-agent": "自主调试",
+  "self-decide-agent": "决策日志与回放评分",
+  "self-discipline-agent": "自律承诺装置",
+  "self-evaluate-agent": "元认知评估与反思",
+  "self-fitness-agent": "健身训练管理",
+  "self-focus-agent": "深度工作与防干扰",
+  "self-habit-agent": "习惯养成与连击",
+  "self-improvement-agent": "AI 自我改进",
+  "self-learn-agent": "知识消化与抗遗忘",
+  "self-master-agent": "技能精进与实战检验",
+  "self-optimize-agent": "受控自我实验优化",
+  "self-protect-agent": "自我边界守护",
+  "self-reflect-agent": "每日三省反思",
+  "self-sleep-agent": "睡眠质量管理",
+  "self-soothe-agent": "情绪调节与疏导",
+  "self-teach-agent": "自我教学与知识内化",
+  "self-verify-agent": "正确性验证与交付门禁"
+}

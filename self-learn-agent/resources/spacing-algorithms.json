@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "description": "间隔与复习调度算法库：self-learn-agent 计算下次复习时间与掌握度时调用的参数与公式。",
+  "algorithms": [
+    {
+      "id": "leitner",
+      "name": "Leitner 盒",
+      "params": {
+        "boxes": 7,
+        "intervals_days": [1, 2, 4, 7, 15, 30, 60],
+        "promote_on_pass": 1,
+        "demote_on_fail": 1
+      },
+      "rule": "答对升一盒（间隔变长），答错降一盒（间隔回短）。",
+      "theory": "Leitner (1972) 间隔重复系统；现代 Anki/SuperMemo 的精神前身",
+      "notes": "实现见 learn.py 的 LEITNER_INTERVALS 与 _review_record。"
+    },
+    {
+      "id": "sm2",
+      "name": "SM-2（SuperMemo）",
+      "params": {
+        "initial_ease": 2.5,
+        "min_ease": 1.3,
+        "quality_range": [0, 5],
+        "pass_threshold": 3,
+        "interval_rule": "I(n)=I(n-1)*EF（n>2）；首两次为 1、6 天"
+      },
+      "rule": "ease 因子按成绩 q 更新：EF' = EF + (0.1 - (5-q)*(0.08+(5-q)*0.02))。",
+      "theory": "Wozniak (1987) SuperMemo SM-2 算法",
+      "notes": "learn.py 用 EF 作为间隔下限的辅助放大因子，与 Leitner 取较大值。"
+    },
+    {
+      "id": "pimsleur",
+      "name": "Pimsleur 梯度",
+      "params": {
+        "intervals_hours": [5, 12, 24, 72, 168, 336, 672, 1344],
+        "graduated_interval_recall": true
+      },
+      "rule": "以小时为单位的固定梯度，越往后间隔翻倍式拉长。",
+      "theory": "Pimsleur (1967)  graduated-interval recall",
+      "notes": "适用于语言等高频短间隔场景，可叠加在 Leitner 之上。"
+    },
+    {
+      "id": "mastery_model",
+      "name": "掌握度更新模型",
+      "params": {
+        "initial": 0.05,
+        "gain_pass_base": 0.12,
+        "gain_pass_per_grade": 0.02,
+        "loss_fail": 0.15,
+        "recall_blend": 0.4
+      },
+      "rule": "通过：mastery += 0.12 + 0.02*grade（封顶 1）；失败：mastery -= 0.15。quiz 用 0.6*旧 + 0.4*recall 混合。",
+      "theory": "Karpicke & Roediger (2008) 提取练习增益；Bjork 可取难度（1992）",
+      "notes": "掌握度是启发式指标，用于排序与风险预警，非绝对测量。"
+    },
+    {
+      "id": "risk_rule",
+      "name": "遗忘风险判定",
+      "params": {
+        "weak_threshold": 0.4,
+        "high_risk_mastery": 0.3,
+        "high_risk_forgotten": 2
+      },
+      "rule": "mastery<0.4 判为薄弱；mastery<0.3 或 forgotten_count>=2 判为高风险（触发退出码 1）。",
+      "theory": "Ebbinghaus (1885) 遗忘速率；Koriat (1993) FOK 校准",
+      "notes": "report 与 review 据此返回 EXIT_ATTENTION(1)。"
+    }
+  ]
+}

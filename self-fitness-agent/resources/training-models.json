@@ -1,0 +1,48 @@
+{
+  "name": "training-models",
+  "version": "2.0.0",
+  "desc": "引擎内部使用的训练科学模型库（计算口径、出处）。",
+  "acwr": {
+    "name": "急性:慢性负荷比 (Acute:Chronic Workload Ratio)",
+    "formula": "ACWR = 近7天负荷合计 / (近28天负荷合计 / 4)",
+    "zones": {"low": "<0.8 退练风险", "sweet": "0.8-1.3 安全甜区", "caution": "1.3-1.5 谨慎加量", "high": ">1.5 伤痛高风险"},
+    "note": "Gabbett 训练负荷与损伤风险模型（Gabbett 2016, Br J Sports Med 50:273-280; 2016, 50:471-475）。"
+  },
+  "monotony": {
+    "name": "单调性 (Monotony)",
+    "formula": "日均负荷 / 日负荷标准差（越高越单一）",
+    "high": ">2.0 偏单一，易劳损",
+    "note": "Foster 等训练单调性/紧张度（Foster 2001, J Strength Cond Res 15(1):109-115）。"
+  },
+  "strain": {
+    "name": "紧张度 (Strain)",
+    "formula": "单调性 × 周负荷",
+    "note": "同上 Foster 2001。"
+  },
+  "progressive_overload": {
+    "name": "渐进超负荷",
+    "desc": "逐步增加负荷/次数/组数/降低休息，使身体持续适应",
+    "note": "Kraemer & Ratamess 2004, Physiol Rev 84:419-428。"
+  },
+  "periodization": {
+    "name": "周期化",
+    "desc": "把训练分为积累/强化/减量与峰值阶段，避免平台与过度疲劳",
+    "note": "Kiely 2012, J Strength Cond Res 26(2):641-654；Bompa & Buzzichelli 2019。"
+  },
+  "heart_rate_zones": {
+    "name": "心率区间 (Karvonen 法)",
+    "target_hr": "(最大心率 - 静息心率) × 强度% + 静息心率",
+    "max_hr_est": "208 - 0.7×年龄（Tanaka 2001, J Am Coll Cardiol 37:153-156）",
+    "note": "Karvonen 1957; Tanaka 2001。"
+  },
+  "hypertrophy_mechanisms": {
+    "name": "肌肥大三机制",
+    "mechanisms": ["机械张力", "代谢压力", "肌肉微损伤"],
+    "note": "Schoenfeld 2010, J Strength Cond Res 24:2857-2872; 2010, Med Sci Sports Exerc 42:40-46。"
+  },
+  "session_load": {
+    "name": "单次训练压力分（工程近似）",
+    "formula": "力量: 时长×(RPE/10) + 组×次×(体重0.5或重量/40)；有氧: 时长×(RPE/10)",
+    "note": "仅供趋势与比值，绝对量不对外承诺；参考 sRPE 法（Foster 2001）。"
+  }
+}

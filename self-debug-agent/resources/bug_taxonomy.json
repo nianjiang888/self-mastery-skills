@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "name": "bug_taxonomy",
+    "version": "2.0.0",
+    "description": "六类 bug 的分类签名、根因、修法与探针提示。供 debug.py --classify 调用。",
+    "note": "signatures 为正则/关键词；evidence 命中即计入该类的归类证据。保持中文友好。"
+  },
+  "types": {
+    "SYNTAX": {
+      "label": "语法错误",
+      "signatures": ["SyntaxError", "IndentationError", "TabError", "invalid syntax", "unexpected EOF", "missing )", "缺少冒号"],
+      "root_cause": "代码不符合语言文法：括号/缩进/冒号/编码。",
+      "fix_pattern": "先过 py_compile/编译器，按报行修文法；不要改语义，只修结构。",
+      "probe_hints": ["报错行号精确", "一般不进治愈循环，直接修文法"]
+    },
+    "SEMANTIC": {
+      "label": "语义/类型错误",
+      "signatures": ["TypeError", "AttributeError", "NameError", "ValueError", "KeyError", "IndexError", "ZeroDivisionError", "RuntimeError", "OverflowError", "NoneType", "object has no attribute", "not defined", "未定义", "没有属性", "division by zero"],
+      "root_cause": "结构对但含义错：类型不匹配、用了 None、名字拼错、键不存在。",
+      "fix_pattern": "核对每个变量的实际类型与生命周期；用类型注解+断言收窄；访问前判空/判存在。",
+      "probe_hints": ["看错误类型即可大概率定位", "重点查 None 传播与拼写"]
+    },
+    "LOGIC": {
+      "label": "逻辑错误",
+      "signatures": ["off.by.one|off by one|边界", "but was", "期望", "实际", "死循环", "infinite loop", "wrong answer", "结果不对", "算错"],
+      "root_cause": "代码能跑但算错：边界条件、循环不变量、符号方向、过早/过晚返回。",
+      "fix_pattern": "用最小用例手推执行轨迹；写断言钉住不变量；对照规格逐行验证。",
+      "probe_hints": ["无异常但结果错", "必须用 --regress 钉死正确行为"]
+    },
+    "CONCURRENCY": {
+      "label": "并发错误",
+      "signatures": ["race condition|竞态", "deadlock|死锁", "Lock", "threading|线程", "asyncio|协程", "资源被占用", "偶尔挂", "时好时坏", "changed size during iteration", "during iteration"],
+      "root_cause": "多执行流争用共享状态：竞态、死锁、可见性。",
+      "fix_pattern": "缩小临界区；用锁/队列/不可变数据；把共享态改成消息传递。",
+      "probe_hints": ["偶发、难复现", "优先用 --reproduce 抓确定性触发条件"]
+    },
+    "RESOURCE": {
+      "label": "资源错误",
+      "signatures": ["OutOfMemory|内存溢出", "MemoryError", "Timeout|超时", "泄漏|leak", "too many open files", "连接池", "句柄耗尽", "栈溢出"],
+      "root_cause": "资源用超：内存/句柄/连接/时间。多为累积泄漏或无限增长。",
+      "fix_pattern": "加边界与回收（with/close）；限流限大小；用流式替代全量加载。",
+      "probe_hints": ["随运行时间恶化", "查循环里未释放的对象/连接"]
+    },
+    "INTEGRATION": {
+      "label": "集成/接口错误",
+      "signatures": ["ConnectionError|连接", "TimeoutError", "HTTP", "API 返回", "schema|字段不符", "序列化|反序列化", "版本不兼容", "依赖"],
+      "root_cause": "模块/服务间契约破裂：接口变更、字段缺失、版本错配、网络。",
+      "fix_pattern": "钉死接口契约（schema/版本）；加容错与重试；对外部依赖做隔离与 mock。",
+      "probe_hints": ["跨进程/跨库时出", "优先查近期依赖或接口变更"]
+    }
+  }
+}

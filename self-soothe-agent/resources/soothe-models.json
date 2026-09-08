@@ -1,0 +1,60 @@
+{
+  "version": "2.0.0",
+  "name": "soothe-models",
+  "desc": "self-soothe-agent 指标定义、阈值与调节状态推断逻辑。",
+  "metrics": {
+    "n": "窗口内情绪事件次数。",
+    "avg_intensity": "强度均值（1-5，1=轻微 5=失控）。",
+    "intensity_trend": "强度趋势：前半段均值 vs 后半段均值，差值>0.2 判上升/下降，否则平稳。同日批量记录保护为「平稳」，避免误报下降。",
+    "freq_week": "频率（件/周）= 窗口内事件数 / (窗口天数/7)。",
+    "top_emotion": "出现次数最多的情绪类型（众数）。",
+    "distortion_mode": "出现次数最多的认知扭曲 tag（众数）；未标记则为 null。",
+    "distortion_share": "主导扭曲占全部已标记事件的比例。",
+    "avg_relief": "应对缓解均值（0-5，0=毫无缓解 5=完全平复）；未记录 relief 则为 null。",
+    "relief_low": "relief 低于阈值（<2.5）的事件数。",
+    "impact_dist": "影响面分布：无/睡眠/关系/工作/身体/专注 各出现次数。",
+    "sleep_share": "波及睡眠的事件占比。",
+    "relation_share": "波及关系的事件占比。",
+    "top_triggers": "出现次数最多的前 3 个诱因（触发，含计数）。",
+    "max_gap": "窗口内最长无情绪记录天数（含首尾空白），反映情绪是否长期在线持续。"
+  },
+  "thresholds": {
+    "WEAK_FREQ_WEEK": 3.0,
+    "WEAK_INTENSITY": 4.0,
+    "WEAK_RELIEF": 2.5,
+    "WEAK_DISTORTION_SHARE": 0.4,
+    "WEAK_IMPACT_SHARE": 0.3,
+    "MIN_RECORDS_FOR_PATTERN": 5
+  },
+  "pattern_inference": {
+    "name": "infer_distortion —— 本包原创量化点（类比沟通的「三层卡点」、创作的「闭环卡点」）",
+    "priority": [
+      "freq_week > 3.0 → emotional-overload（情绪过载）",
+      "avg_intensity >= 4.0 → high-intensity（高强波动）",
+      "avg_relief < 2.5 → ineffective-coping（应对低效）",
+      "distortion_mode 存在且 share >= 0.4 → 该扭曲 key（主导扭曲清晰）",
+      "distortion_mode 存在但 share < 0.4 → balanced（扭曲均衡，未主导）",
+      "无扭曲标记且无上述 → healthy（调节健康）",
+      "样本不足（n < 5）→ 样本不足"
+    ],
+    "meaning": "主导认知扭曲取自窗口内标记最多的扭曲；只有占比达 0.4 才算清晰模式，否则视为均衡或未形成主导。情绪过载/高强/应对低效优先于扭曲展示，因为它们更紧急。"
+  },
+  "scales": {
+    "intensity": "1-5：1 轻微（有点在意）2 有点 3 明显 4 很强 5 失控",
+    "relief": "0-5：0 毫无缓解 1 更糟 2 略微 3 有所 4 大部分 5 完全平复",
+    "impact": "无 / 睡眠 / 关系 / 工作 / 身体 / 专注"
+  },
+  "distortions": {
+    "all-or-nothing": "非黑即白（全或无思维）",
+    "overgeneralization": "以偏概全（一次=永远）",
+    "mental-filter": "心理过滤（只盯负面）",
+    "disqualify-positive": "否定积极（好事不算数）",
+    "mind-reading": "读心（断定别人怎么想）",
+    "fortune-telling": "灾难预言（断定最坏结果）",
+    "magnification": "放大灾难（小题大做）",
+    "emotional-reasoning": "情绪化推理（感觉糟=事实糟）",
+    "should": "应该句式（必须/不得不）",
+    "labeling": "贴标签（我是废物）",
+    "personalization": "个人化（都是我的错）"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "title": "睡眠指标定义与计算口径库",
+  "note": "self-sleep-agent 引擎计算各指标时遵循的统一定义，确保记录者之间口径一致、可复核。",
+  "metrics": [
+    {"id": "bedtime", "name": "就寝时间", "unit": "HH:MM", "def": "上床关灯准备睡觉的时刻（24小时制）", "example": "23:30"},
+    {"id": "onset", "name": "入睡时刻", "unit": "HH:MM", "def": "实际睡着的时刻；若未记则按 bedtime + latency 推算", "example": "23:50"},
+    {"id": "wake", "name": "醒来时刻", "unit": "HH:MM", "def": "最后一次夜间觉醒后准备起床的时刻（可能跨零点）", "example": "06:30"},
+    {"id": "rise", "name": "离床时刻", "unit": "HH:MM", "def": "真正离开床铺的时刻，默认等于 wake", "example": "06:40"},
+    {"id": "latency", "name": "入睡潜伏期", "unit": "分钟", "def": "onset - bedtime；>30 分钟判为偏长", "calc": "onset_min - bedtime_min（跨零点 +1440）"},
+    {"id": "tib", "name": "卧床时长 TimeInBed", "unit": "分钟", "def": "rise - bedtime", "calc": "rise_min - bedtime_min"},
+    {"id": "waso", "name": "睡眠中觉醒 WASO", "unit": "分钟", "def": "Wake After Sleep Onset；未记录时按 wakings×15 估算", "calc": "explicit or wakings*15"},
+    {"id": "total_sleep", "name": "总睡眠时长", "unit": "分钟", "def": "wake - onset - waso", "calc": "max(wake_min - onset_min - waso, 0)"},
+    {"id": "efficiency", "name": "睡眠效率", "unit": "%", "def": "total_sleep / tib × 100；≥85% 为健康", "calc": "round(total/tib*100,1)"},
+    {"id": "midpoint", "name": "睡眠中点", "unit": "分钟(归一至0-1440)", "def": "onset + total_sleep/2，用于时型与社会时差", "calc": "((onset + wake - waso)/2) % 1440"},
+    {"id": "quality", "name": "主观睡眠质量", "unit": "1-5", "def": "醒来后自评，5为极好", "example": "4"},
+    {"id": "mood", "name": "次日情绪", "unit": "1-5", "def": "次日白天自评精力/情绪，5为极佳", "example": "4"},
+    {"id": "caffeine_h", "name": "咖啡因距寝小时", "unit": "小时", "def": "最后一杯咖啡因到就寝的小时数；越小越近就寝", "weak_if_lt": 6},
+    {"id": "screen", "name": "睡前屏幕分钟", "unit": "分钟", "def": "就寝前使用发光屏幕的分钟数", "weak_if_gt": 60},
+    {"id": "daytype", "name": "日期类型", "unit": "work/free", "def": "用于社会时差计算；不填则忽略", "example": "work"}
+  ],
+  "derived_scores": [
+    {"id": "regularity", "name": "规律性评分", "range": "0-100", "def": "基于就寝与起床时间日间标准差的工程近似（见 circadian-models.json 的 SRI 说明）"},
+    {"id": "debt", "name": "睡眠债", "unit": "分钟/日", "def": "目标时长 - 实际平均时长，>30 分钟/日判弱项"},
+    {"id": "social_jetlag", "name": "社会时差", "unit": "小时", "def": "work 与 free 两类记录睡眠中点之差；≥2 小时预警"}
+  ],
+  "cross_midnight_rule": "任一后续时刻小于前一时刻，视为跨零点自动 +1440 分钟；睡眠中点最终对 1440 取模归一。"
+}

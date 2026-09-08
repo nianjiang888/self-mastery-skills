@@ -1,0 +1,53 @@
+{
+  "name": "fitness-guidelines",
+  "version": "2.0.0",
+  "desc": "分目标的训练频率/时长/强度推荐与营养、热身规则，均带可核验出处。",
+  "goals": {
+    "health": {
+      "weekly_freq": 3,
+      "strength_sessions": "每周 2 次全身或上下分化",
+      "cardio_min": 150,
+      "note": "健康维持底线：ACSM 建议每周至少 150 分钟中等强度有氧或 75 分钟高强度（Garber 2011, Med Sci Sports Exerc 43(7):1334-1359）。"
+    },
+    "hypertrophy": {
+      "weekly_freq": 3,
+      "sets_per_muscle": "每肌群每周 10-20 组",
+      "reps": "6-12 次",
+      "rest": "60-120 秒",
+      "note": "肌肥大：每肌群每周 10+ 组更有效（Schoenfeld 2016, Sports Med 46:1689-1697；Krieger 2010, J Strength Cond Res 24:1150-1159）。"
+    },
+    "strength": {
+      "weekly_freq": 3,
+      "reps": "1-6 次",
+      "sets": "4-6 组",
+      "rest": "2-5 分钟",
+      "note": "最大力量：高强度低次数、长间歇（Suchomel 2016, J Strength Cond Res 30:2051-2059）。"
+    },
+    "fat_loss": {
+      "weekly_freq": 4,
+      "mix": "力量保肌 + 有氧制造缺口",
+      "note": "减脂期保持力量训练以防肌肉流失（Weinheimer 2012, Med Sci Sports Exerc 44:1081-1088）。"
+    }
+  },
+  "nutrition": {
+    "protein_per_kg": "1.6-2.2 g/kg/天",
+    "per_meal_anchor": "每餐 0.3-0.4 g/kg 刺激合成",
+    "note": "蛋白质：1.6-2.2 g/kg（Morton 2018, Br J Sports Med 52:376-384）；每餐 0.3-0.4 g/kg 更优（Moore 2015, J Int Soc Sports Nutr 12:19；Phillips 2016）。"
+  },
+  "warmup": {
+    "rule": "专项动态热身 5-10 分钟，降低损伤、提升表现",
+    "note": "专项动态热身可减少运动损伤（Fradkin 2006, J Sci Med Sport 9:32-35；McGowan 2015, J Sci Med Sport 18:453-459）。"
+  },
+  "progression": {
+    "rule": "在恢复允许下每周渐进加量 2-5%，避免 ACWR 突破 1.5",
+    "note": "渐进超负荷是长期进步核心（Kraemer & Ratamess 2004, Physiol Rev 84:419-428）；急性:慢性负荷比控在 0.8-1.3 最安全（Gabbett 2016, Br J Sports Med 50:273-280）。"
+  },
+  "recovery": {
+    "sleep_hours": "7-9 小时",
+    "note": "睡眠直接决定恢复与下次表现（Watson 2017, Sleep 40(1):zsx019；与 self-sleep-agent 衔接）。"
+  },
+  "overtraining": {
+    "signs": ["持续疲劳", "表现下降", "睡眠/情绪变差", "静息心率升高", "易感染"],
+    "note": "过度训练综合征共识（Meeusen 2013, Eur J Sport Sci 13(1):1-24）。"
+  }
+}

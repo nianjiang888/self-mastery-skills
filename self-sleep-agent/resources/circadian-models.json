@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "title": "昼夜节律与睡眠结构模型库",
+  "note": "为引擎的 rhythm/regularity/chronotype 计算提供理论锚点。引擎使用的是工程近似，详见各条 source。",
+  "two_process_model": {
+    "name": "双过程模型（Process S + Process C）",
+    "proposed_by": "Borbély 1982, Human Neurobiology 1(3):195-204；Borbély & Achermann 1999, J Biol Rhythms 14(6):557-568",
+    "process_s": "睡眠压力（腺苷累积），清醒越久越高，睡眠中指数衰减（练习幂律式）",
+    "process_c": "昼夜节律（视交叉上核 SCN 驱动），决定睡眠窗口与警觉度起伏，受光强授时",
+    "implication": "好睡眠=在 Process C 允许的低警觉窗口 + Process S 足够高时入睡；熬夜既抬高 S 又对抗 C，最伤"
+  },
+  "sleep_regularity_index": {
+    "name": "睡眠规律性指数（SRI）",
+    "proposed_by": "Phillips et al. 2017, Sleep 40(8):zsx097",
+    "definition": "逐对比较相邻日同一时刻的睡眠/清醒状态，取值 -100 到 100，越高越规律",
+    "engine_proxy": "本引擎用就寝与起床时间的日间标准差映射为 0-100 评分，是对全量 SRI 的工程近似，非逐分钟全量计算",
+    "thresholds": {"healthy_low": 60, "note": "低于约 60 的规律性常与较差健康结局相关（研究队列差异大，仅作参考）"}
+  },
+  "chronotype": {
+    "concept": "时型（睡眠类型）= 个体偏好的睡眠时点，由内源周期与光照共同决定",
+    "measure": "慕尼黑时型问卷 MCTQ（Munich ChronoType Questionnaire），Roenneberg et al. 2003, J Sleep Res 12(3):231-239；2007, Sleep Med Rev 11(4):413-422",
+    "categories": [
+      {"type": "早鸟型（晨型/ lion）", "midpoint_before": 180, "note": "睡眠中点通常早于 03:00"},
+      {"type": "中间型", "midpoint_range": "180-270", "note": "睡眠中点在 03:00-04:30 之间"},
+      {"type": "夜猫型（晚型/ owl）", "midpoint_after": 270, "note": "睡眠中点通常晚于 04:30，青少年普遍后移"}
+    ],
+    "social_jetlag": {
+      "definition": "工作日与自由日睡眠中点的差值，衡量『社交时差』",
+      "proposed_by": "Wittmann et al. 2006, Current Biology 16(9):939-943",
+      "threshold_warn": 2.0,
+      "note": "≥2 小时与代谢、情绪与表现下降相关；周末补觉并不能真正补回，反而加剧相位漂移"
+    }
+  },
+  "sleep_stages": {
+    "framework": "Rechtschaffen & Kales 1968 睡眠分期标准；AASM 2012 更新（睡眠分为 N1/N2/N3 + REM）",
+    "n3_sws": "慢波睡眠（深睡），前半夜为主，与身体修复、生长激素分泌相关",
+    "rem": "快速眼动睡眠，后半夜占比上升，与记忆巩固、情绪调节相关",
+    "age_change": "随年龄增长深睡与总睡眠减少、夜醒增多，属正常生理变化（Ohayon et al. 2004, Sleep Med Rev 8(4):281-301）"
+  },
+  "light_entrainment": {
+    "name": "光照授时与褪黑素",
+    "source": "Czeisler et al. 1986, Science 233(4764):667-671；Lewy et al. 1998, J Biol Rhythms 13(4):352-365",
+    "note": "晨间强光提前相位、夜间强光推迟相位；褪黑素在暗光下分泌，是『天黑了』的化学信号"
+  }
+}

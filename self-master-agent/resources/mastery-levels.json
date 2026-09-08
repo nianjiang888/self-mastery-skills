@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "name": "mastery-levels",
+  "description": "技能登顶的五级阶梯通用判据库，供 self-master-agent 的 ladder 子命令调用与参考。",
+  "levels": [
+    {
+      "level": 1,
+      "key": "novice",
+      "name": "入门",
+      "en": "Novice",
+      "criteria": "在指导下能完成标准流程，遇到偏差不会自己修正；依赖清单与模板。",
+      "signal": "能照着做，但说不清为什么。",
+      "source": "Dreyfus & Dreyfus (1980, 1986) 技能习得五阶段之第一阶段；Fitts & Posner (1967) 认知阶段。"
+    },
+    {
+      "level": 2,
+      "key": "competent",
+      "name": "胜任",
+      "en": "Competent",
+      "criteria": "能独立处理常见情形，会做计划与排序，但对非典型问题仍吃力。",
+      "signal": "大多数事能自己搞定，复杂情况会卡。",
+      "source": "Dreyfus & Dreyfus (1986) 第二阶段；Benner (1982) 护师胜任阶段。"
+    },
+    {
+      "level": 3,
+      "key": "proficient",
+      "name": "熟练",
+      "en": "Proficient",
+      "criteria": "凭经验能预判情形走向，遇到异常能快速定位根因并调整策略。",
+      "signal": "看到苗头就知道要出事，且知道改哪。",
+      "source": "Dreyfus & Dreyfus (1986) 第三阶段；专家-新手差异研究（Chi et al. 1981）。"
+    },
+    {
+      "level": 4,
+      "key": "expert",
+      "name": "精通",
+      "en": "Expert",
+      "criteria": "在无规则可循的新情境下也能凭直觉与深层模型给出高质量方案，能教别人。",
+      "signal": "别人来问你，你能讲清底层原理与边界。",
+      "source": "Dreyfus & Dreyfus (1986) 第四阶段；Kahneman & Klein (2009) 直觉专长条件。"
+    },
+    {
+      "level": 5,
+      "key": "master",
+      "name": "登顶",
+      "en": "Master",
+      "criteria": "形成个人方法论与风格，能跨界迁移、开创范式、定义该领域的新判据。",
+      "signal": "你不只是会，而是在拓展这门技能的边界。",
+      "source": "Ericsson (1993, 2006) 刻意练习达成专家后的再跃迁；Bloom (1985) 大师级表现研究。"
+    }
+  ],
+  "promotion_rule": {
+    "description": "晋升到下一级需同时满足：至少 N 次『下一级难度』真实实战成功，且一次自评得分达到目标层级。",
+    "drills_needed": 3,
+    "require_measure": true,
+    "note": "实战必须是真实世界任务（有可核验证据），模拟练习不计入晋升。"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "name": "soothe-domains",
+  "desc": "self-soothe-agent 字段 schema、弱项规则、退出码与边界声明。",
+  "fields": {
+    "emotion_event": {
+      "type": "emotion",
+      "id": "emo-<date>#<seq>（可 --id 覆盖修正）",
+      "date": "YYYY-MM-DD",
+      "trigger": "诱因（发生了什么，必填）",
+      "emotion": "情绪类型（必填）：焦虑/愤怒/悲伤/恐惧/羞耻/内疚/孤独/烦躁/嫉妒/麻木/无力/其他",
+      "intensity": "1-5（必填）",
+      "thought": "自动思维/当时脑子里的话（可选）",
+      "distortion": "认知扭曲 key（可选，见 distortions）",
+      "action": "当时用了什么方式应对（可选）",
+      "relief": "0-5 缓解程度（可选）",
+      "impact": "影响面（默认 无）：无/睡眠/关系/工作/身体/专注"
+    },
+    "profile": {
+      "name": "你的称呼",
+      "focus": "最常困扰的领域",
+      "goal": "阶段目标",
+      "note": "备注"
+    }
+  },
+  "weak_spot_rules": [
+    {"id": "w1", "severity": "高", "condition": "freq_week > 3.0", "text": "情绪事件频率过高，情绪过载", "action_source": "emotional-overlap"},
+    {"id": "w2", "severity": "高", "condition": "avg_intensity >= 4.0", "text": "平均强度过高，缓冲被压缩", "action_source": "降级而非消灭（物理降温）"},
+    {"id": "w3", "severity": "高", "condition": "avg_relief < 2.5", "text": "应对平均缓解过低，常用方式基本没用", "action_source": "ineffective-coping"},
+    {"id": "w4", "severity": "中", "condition": "distortion_mode 存在且 share >= 0.4", "text": "主导认知扭曲清晰", "action_source": "<distortion key> 破局剧本"},
+    {"id": "w5", "severity": "中", "condition": "sleep_share >= 0.3", "text": "情绪高频波及睡眠", "action_source": "睡前情绪截止线"},
+    {"id": "w6", "severity": "中", "condition": "relation_share >= 0.3", "text": "情绪高频波及关系", "action_source": "情绪缓冲（先对自己说一遍）"},
+    {"id": "w7", "severity": "中", "condition": "intensity_trend == 上升", "text": "强度趋势上升，最近在加码", "action_source": "今天就用一次降级动作"},
+    {"id": "w8", "severity": "低", "condition": "n < 5", "text": "样本不足，模式判定不可靠", "action_source": "继续记录到 5 次以上"}
+  ],
+  "exit_codes": {
+    "0": "正常（无中/高严重度弱项）",
+    "1": "需关注（存在中或高严重度弱项，risk/plan/report 返回）",
+    "2": "用法错误（未知子命令）",
+    "4": "参数或数据不可用（缺参/越界/数据缺失/资源缺失）"
+  },
+  "boundary": {
+    "is": [
+      "情绪调节教练：记录、量化、识别认知扭曲、给 CBT 破局剧本",
+      "可重跑的实物证据：events.jsonl + profile.json + reports/soothe-<日期>.md",
+      "诚实标注：模式基于你自己的记录，不是诊断"
+    ],
+    "is_not": [
+      "不是医疗诊断，不替代精神科医生/咨询师",
+      "不判断你「有没有病」，不给出药物或治疗建议",
+      "不替代紧急求助：有自伤/伤人风险请立即联系专业机构或信任的人",
+      "不替你做决定，只把模式摆清、给可练的动作"
+    ],
+    "privacy": "所有数据留在本地数据目录，不上传、不联网；本工具无网络请求。"
+  }
+}

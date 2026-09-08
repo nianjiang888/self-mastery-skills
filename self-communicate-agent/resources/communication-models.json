@@ -1,0 +1,85 @@
+{
+  "version": "2.0.0",
+  "note": "self-communicate-agent 各指标的算法定义与文献出处。指标口径与脚本实现一一对应。",
+  "models": {
+    "avg_outcome": {
+      "name": "平均达成率",
+      "formula": "窗口内所有记录 outcome（1-5）的算术平均",
+      "meaning": "你说的这些话，整体拿到想要的结果了吗。1=很糟，5=很好",
+      "source": "自评量表设计参考 Likert 1932 五点量表"
+    },
+    "defense_rate": {
+      "name": "防御率",
+      "formula": "(反应为防御 + 反应为对抗) 的条数 ÷ 总条数 × 100",
+      "meaning": "对方进入防御状态的比例。防御率高的根因通常是安全感丢失，而非内容不对",
+      "source": "Patterson et al. 2002《Crucial Conversations》：沉默与暴力是安全感丢失的两个信号"
+    },
+    "confront_rate": {
+      "name": "对抗率",
+      "formula": "反应为对抗的条数 ÷ 总条数 × 100",
+      "meaning": "把对方推到对立面的比例，比防御率更严重",
+      "source": "同上"
+    },
+    "avg_tone": {
+      "name": "情绪强度均值",
+      "formula": "窗口内 tone（1-10）的平均；>=7 记为高强度",
+      "meaning": "你自己开口时的情绪水平",
+      "source": "情绪强度自评；高强度分界取 7 为工程约定（上四分位附近）"
+    },
+    "emotion_cost": {
+      "name": "情绪代价",
+      "formula": "高强度情绪组的平均达成 − 低强度情绪组的平均达成",
+      "meaning": "负值 = 情绪上头时结果明显更差。这是本引擎最有诊断价值的指标：它把「别在气头上说话」变成了你自己的数据",
+      "source": "情绪标注与情绪调节研究：Lieberman et al. 2007, Psychological Science 18(5)"
+    },
+    "avg_listened": {
+      "name": "倾听分",
+      "formula": "窗口内 listened（1-5）的平均",
+      "meaning": "你觉得自己听进去了多少。低于 2.5 说明说得多听得少",
+      "source": "反映式倾听传统；Rogers 1957"
+    },
+    "avg_aftermath": {
+      "name": "关系账户",
+      "formula": "窗口内 aftermath（-2..+2）的平均",
+      "meaning": "对话结束后，这段关系是变好了还是变差了。负值 = 你在持续透支",
+      "source": "借喻自「情感银行账户」概念（Covey 1989）；Gottman 关于关系修复的研究"
+    },
+    "identity_rate": {
+      "name": "身份层冲突占比",
+      "formula": "推断为身份层的条数 ÷ 总条数 × 100",
+      "meaning": "有多少次谈崩，根子不在事情而在面子",
+      "source": "Stone, Patton & Heen 1999《Difficult Conversations》三层模型"
+    },
+    "infer_layer": {
+      "name": "层次推断规则",
+      "formula": "优先级 身份 > 情绪 > 事实。aftermath<=-1 且 outcome<=2 → 身份；tone>=7 → 情绪；其余 → 事实",
+      "meaning": "自动判断这次对话卡在哪一层，省去你自己归类的负担",
+      "source": "同上；用户可用 --layer 显式覆盖引擎推断"
+    },
+    "script_rate": {
+      "name": "话术沉淀率",
+      "formula": "填写了「下次怎么说」的条数 ÷ 总条数 × 100",
+      "meaning": "复盘了但没留下替换说法，等于没复盘",
+      "source": "刻意练习与复盘闭环；Ericsson 1993, Psychological Review 100(3)"
+    },
+    "weakest_scene": {
+      "name": "最弱场景",
+      "formula": "样本数 >= 2 的场景中，平均达成最低的那个",
+      "meaning": "你的沟通短板集中在哪种情境",
+      "source": "自评分组统计"
+    }
+  },
+  "thresholds": {
+    "HIGH_TONE": 7,
+    "WEAK_DEFENSE_RATE": 40.0,
+    "WEAK_EMOTION_COST": -1.0,
+    "WEAK_LISTENED": 2.5,
+    "WEAK_SCENE_OUTCOME": 2.5,
+    "WEAK_IDENTITY_RATE": 40.0,
+    "WEAK_CONFRONT_RATE": 20.0,
+    "WEAK_SCRIPT_RATE": 30.0,
+    "MIN_RECORDS_FOR_PATTERN": 5,
+    "MIN_SCENE_N": 2,
+    "note": "阈值为工程约定值，用于触发提醒而非诊断。样本不足（<5 条）时不做模式判定。"
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "version": "2.0.0",
+  "description": "决策框架库：驱动 decide.py 的 frameworks 子命令与 log 的 --framework 标注。每个框架含年份、提出者、何时用、步骤摘要，并与 references/ 中的理论长文一一对应。纯数据，零依赖。",
+  "frameworks": [
+    {
+      "id": "bezos_doors",
+      "name_cn": "单向门 / 双向门",
+      "name_en": "One-Way / Two-Way Door",
+      "year": "2015-2016",
+      "originator": "Jeff Bezos（亚马逊 2015、2016 股东信）",
+      "one_liner": "先把决策分成可逆与不可逆两类，再匹配决策速度与标准。",
+      "when_to_use": "任何需要决定『要不要慢想 / 能不能快刀斩乱麻』的时刻；尤其用于终结分析瘫痪。",
+      "steps": [
+        "问：这个决定走错了，能在合理成本内退回吗？",
+        "能退回 → 双向门：用 70% 信息快速决定、小步试错、授权他人。",
+        "不能退回 → 单向门：慢思考、多方校验、提高标准、留退出路径。",
+        "警惕：一系列小可逆决定叠加成不可逆局面（单向门蠕变）。"
+      ],
+      "links_to_theory": "references/reversible-framework.md"
+    },
+    {
+      "id": "regret_minimization",
+      "name_cn": "后悔最小化框架",
+      "name_en": "Regret Minimization Framework",
+      "year": "1994",
+      "originator": "Jeff Bezos（1994 年辞职创业时自用；Gilovich 提供心理学根基）",
+      "one_liner": "想象 80 岁的自己回看，选那个『更不后悔』的选项。",
+      "when_to_use": "重大人生 / 职业岔路；在『做了怕后悔 / 没做也怕后悔』之间摇摆时。",
+      "steps": [
+        "把自己投影到 80 岁，回看这一生。",
+        "问：我会后悔没试这件事，还是后悔试了没成？",
+        "长期看，人更多为『没做』（不作为后悔）而非『做了』（作为后悔）夜不能寐。",
+        "想清楚后快速行动——速度本身就是优势。"
+      ],
+      "links_to_theory": "references/regret-minimization.md"
+    },
+    {
+      "id": "pre_mortem",
+      "name_cn": "事前验尸",
+      "name_en": "Pre-Mortem",
+      "year": "2007",
+      "originator": "Gary Klein（HBR《Performing a Project Premortem》85(9):18-19；机制源自 Mitchell, Russo & Pennington 1989 的前瞻性后见之明）",
+      "one_liner": "在决定尚未执行时，先假设它已经惨败，再倒推失败原因。",
+      "when_to_use": "高 stakes、不可逆、下行风险大的决策；团队容易受到乐观偏误与群体思维裹挟时。",
+      "steps": [
+        "假设未来已来，这个决定导致了最糟结果。",
+        "沉默独立写下所有失败原因（约 5-10 分钟，阻断锚定）。",
+        "轮流读出原因，聚类成主题。",
+        "对 Top3 失败模式，立刻写一条可执行的预防措施。",
+        "Klein 实测：识别失败原因能力提升约 30%。"
+      ],
+      "links_to_theory": "references/pre-mortem-method.md"
+    },
+    {
+      "id": "second_order",
+      "name_cn": "二阶思考",
+      "name_en": "Second-Order Thinking",
+      "year": "2011",
+      "originator": "Howard Marks（《The Most Important Thing》，思想可溯至 Bastiat 1850《看得见的与看不见的》）",
+      "one_liner": "不只问『接下来会怎样』，还要追问『然后呢』，推演反应的连锁。",
+      "when_to_use": "竞争环境、投资、组织策略；当一阶结果『显而易见的好』时尤其要小心其二阶代价。",
+      "steps": [
+        "写下直接的一阶效应（最显见、最常止步于此）。",
+        "问：相关方会如何反应？这反应又引发什么（二阶）？",
+        "二阶的结果又会触发什么（三阶）？",
+        "关键问题：大家都看得见的『好』，其二阶代价是否被低估了？"
+      ],
+      "links_to_theory": "references/second-order-thinking.md"
+    },
+    {
+      "id": "ten_ten_ten",
+      "name_cn": "10-10-10 三时窗",
+      "name_en": "10-10-10 Rule",
+      "year": "2008",
+      "originator": "Suzy Welch（《10-10-10: A Life Transforming Idea》，曾任 HBR 总编辑）",
+      "one_liner": "对同一个决定，分别站在 10 分钟、10 个月、10 年三个时间点上审视。",
+      "when_to_use": "被当下情绪劫持、短期诱惑 vs 长期价值冲突时；个人与职业两难。",
+      "steps": [
+        "10 分钟后我怎么看？——捕捉即时情绪与关系冲击。",
+        "10 个月后我怎么看？——看中期代价与可靠性。",
+        "10 年后我怎么看？——对齐长期价值观与人生优先级。",
+        "三个时点的答案冲突时，长期视角优先校准。"
+      ],
+      "links_to_theory": "references/10-10-10-method.md"
+    },
+    {
+      "id": "cynefin",
+      "name_cn": "Cynefin 复杂情境框架",
+      "name_en": "Cynefin Framework",
+      "year": "2007",
+      "originator": "Dave Snowden & Mary E. Boone（HBR《A Leader's Framework for Decision Making》，PMID 18159787）",
+      "one_liner": "先把问题归入五类情境，再匹配对应的决策逻辑。",
+      "when_to_use": "不确定『这事该分析、该试错还是该先控场』时；复杂/混沌问题误用清晰域打法会翻车。",
+      "steps": [
+        "Clear/清晰（已知已知）：感知-分类-响应，用最佳实践。",
+        "Complicated/复杂（已知未知）：感知-分析-响应，靠专家。",
+        "Complex/复杂（未知未知）：探针-感知-响应，小步安全试错。",
+        "Chaotic/混沌：先行动建立秩序，再转复杂域。",
+        "Disorder/失序：拆成子问题分派到上面四域。"
+      ],
+      "links_to_theory": "references/cynefin-ooda.md"
+    },
+    {
+      "id": "ooda",
+      "name_cn": "OODA 循环",
+      "name_en": "OODA Loop",
+      "year": "1987",
+      "originator": "John Boyd（美国空军上校，军事战略家）",
+      "one_liner": "观察-判断-决策-行动，循环迭代，抢在对手完成循环前行动。",
+      "when_to_use": "快变对抗环境（竞标、危机、博弈）；需要比对手更快迭代时。",
+      "steps": [
+        "Observe 观察：持续收集真实态势，警惕被旧剧本误导。",
+        "Orient 判断：用经验、文化、新信息重构认知（最关键的环节）。",
+        "Decide 决策：在多个选项中选定。",
+        "Act 行动：执行并立即进入下一轮观察。",
+        "目标：决策节奏快过对手，使其陷入『观察-判断』瘫痪。"
+      ],
+      "links_to_theory": "references/cynefin-ooda.md"
+    },
+    {
+      "id": "external_view",
+      "name_cn": "外部视角 / 参考类预测",
+      "name_en": "Outside View / Reference-Class Forecasting",
+      "year": "2011",
+      "originator": "Kahneman, Lovallo & Sibony（HBR《Before You Make That Big Decision》）",
+      "one_liner": "别只锚定自己这个项目的细节（内部视角），先看同类项目的统计分布。",
+      "when_to_use": "做计划、估时间、估收益；人人都容易陷入计划谬误与过度自信时。",
+      "steps": [
+        "识别与当前决策可比的『参考类』（同类项目）。",
+        "查该类的中位数结果（工期 / 成本 / 成功率）。",
+        "把你的计划与该基准对比，而非与自己的乐观设想对比。",
+        "用基准校准，而非用『我们不一样』自我宽慰。"
+      ],
+      "links_to_theory": "references/external-view-planning-fallacy.md"
+    },
+    {
+      "id": "real_options",
+      "name_cn": "实物期权 / 灵活性价值",
+      "name_en": "Real Options / Value of Flexibility",
+      "year": "1994",
+      "originator": "Dixit & Pindyck（《Investment Under Uncertainty》）",
+      "one_liner": "把『推迟 / 分阶段 / 留退出权』本身当资产估值。",
+      "when_to_use": "不确定性高、不可逆成本大；面临『现在 All-in 还是先占个小位』时。",
+      "steps": [
+        "把不可逆投入看作『行权价』，把未来选择权看作『期权』。",
+        "高不确定性下，保留灵活性的价值上升——宁可小投入占坑。",
+        "设计可退出的阶段门：每阶段只押最小可逆成本。",
+        "与单向门框架配合：单向门更要买『期权』而非一次性赌死。"
+      ],
+      "links_to_theory": "references/real-options-flexibility.md"
+    },
+    {
+      "id": "first_principles",
+      "name_cn": "第一性原理",
+      "name_en": "First Principles Thinking",
+      "year": "古典-当代",
+      "originator": "Aristotle 提出；Elon Musk 等当代推广",
+      "one_liner": "把问题拆到不可再分的基本真理，再从那里重建，而非类比推论。",
+      "when_to_use": "现成方案都失灵、需要原创解；被锚定与确认偏误困住时。",
+      "steps": [
+        "列出问题背后的所有假设。",
+        "逐一追问：这个假设是真的吗？能否从更基本的真理推出？",
+        "只保留站得住的基本事实，从零重建方案。",
+        "它直接对冲锚定偏误与确认偏误。"
+      ],
+      "links_to_theory": "references/decision-biases-catalog.md"
+    },
+    {
+      "id": "weighted_matrix",
+      "name_cn": "加权决策矩阵",
+      "name_en": "Weighted Decision Matrix",
+      "year": "通用",
+      "originator": "多准则决策分析（MCDA）通用工具",
+      "one_liner": "先定权重再打分，让『数学与直觉冲突』变成可检查的提示。",
+      "when_to_use": "三选项以上的多维度决策；容易因某个亮点（光环效应）忽略短板时。",
+      "steps": [
+        "列出所有候选与所有维度。",
+        "先独立设定各维度权重（不要在看到选项后再调权重）。",
+        "对每个维度打分并加权求和。",
+        "若『数学赢家』与直觉不符，把差距当线索重新审视权重。"
+      ],
+      "links_to_theory": "references/decision-biases-catalog.md"
+    },
+    {
+      "id": "hell_yes_or_no",
+      "name_cn": "Hell-Yeah-or-No 过滤",
+      "name_en": "Hell Yeah or No",
+      "year": "当代",
+      "originator": "Derek Sivers",
+      "one_liner": "默认拒绝；只有『Hell yeah!』的事才做。",
+      "when_to_use": "机会过多、注意力被稀释；需要给重要决策腾出带宽时。",
+      "steps": [
+        "对任何新机会，问：这是 Hell yeah 还是只是还行？",
+        "『还行』一律视为 No，把带宽留给真正重要的事。",
+        "与决策疲劳理论呼应：减少低质决策消耗 System 2 电池。"
+      ],
+      "links_to_theory": "references/decide-theory.md"
+    }
+  ]
+}

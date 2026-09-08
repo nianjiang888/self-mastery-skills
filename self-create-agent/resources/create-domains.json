@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "note": "字段 schema、弱项判定规则、退出码与边界声明。",
+  "fields": {
+    "idea": {
+      "type": "idea",
+      "id": "必填（留空自动生成 idea-日期#序号）",
+      "date": "记录日期 YYYY-MM-DD",
+      "content": "灵感内容（必填）",
+      "theme": "主题/领域，默认 未分类",
+      "source": "灵感来源（散步/阅读/梦…）可选",
+      "status": ["灵感", "已启动", "已转化"]
+    },
+    "work": {
+      "type": "work",
+      "id": "必填（留空自动生成 work-日期#序号）",
+      "date": "记录日期 YYYY-MM-DD",
+      "title": "作品名（必填）",
+      "theme": "主题/领域，默认 未分类",
+      "stage": ["启动", "完成", "打磨", "发布"],
+      "quality": "自评质量 1-5（必填）",
+      "hours": "投入时长（小时，可选，须为正）",
+      "source": "源自哪条灵感 id（可选）",
+      "feedback": "外部反馈 1-5（可选）"
+    },
+    "profile": {
+      "name": "创作者名",
+      "domain": "创作领域",
+      "focus": "主攻方向",
+      "goal": "阶段目标",
+      "note": "备注"
+    }
+  },
+  "scales": {
+    "quality": "1=很糙 2=一般 3=还行 4=满意 5=很满意（自评，配合外部 feedback 校准）",
+    "stage": "启动(开了头) < 完成(初稿) < 打磨(精修) < 发布(对外)",
+    "idea_status": "灵感(只是个念头) < 已启动(开始做) < 已转化(变成作品)"
+  },
+  "weak_spot_rules": [
+    {"severity": "高", "cond": "idea_redeem < 30%", "action": "每周固定挑 1 条灵感，用最小可行版本当天开个头"},
+    {"severity": "高", "cond": "max_gap > 14 天", "action": "设不间断链条，任意 14 天别完全空窗"},
+    {"severity": "高", "cond": "quality_trend == 下降", "action": "先降量保质，每件过质量自检清单再发"},
+    {"severity": "中", "cond": "ship_rate < 50%（样本≥5）", "action": "把发布改成日常动作，定最小发布格式"},
+    {"severity": "中", "cond": "finish_rate < 50%（样本≥5）", "action": "设完成线而非完美线，先出初稿"},
+    {"severity": "中", "cond": "freq_week < 0.8", "action": "固定时段+习惯叠加，靠密度不靠状态"},
+    {"severity": "中", "cond": "distinct_themes==1（样本≥5）", "action": "加一个实验田主题，每月试 1 件不同品类"},
+    {"severity": "中", "cond": "max_theme_share < 0.25（样本≥5）", "action": "收敛到 2-3 主线，让作品互相加成"},
+    {"severity": "中", "cond": "avg_quality < 3.0", "action": "请懂行人打分，针对性练最弱项"},
+    {"severity": "低", "cond": "作品数 < 5", "action": "继续记录到 5 件以上，模式识别才有意义"}
+  ],
+  "exit_codes": {
+    "0": "正常（无中/高严重度模式）",
+    "1": "存在中或高严重度模式（risk/report 触发）",
+    "2": "未知子命令",
+    "4": "参数或数据不可用（缺必填/越界/找不到记录）"
+  },
+  "boundary": {
+    "is": [
+      "创作教练：帮你持续产出、看清卡点、越创越强",
+      "记录与量化工具：把模糊的「卡住」变成可计算指标",
+      "灵感库与作品集的轻量管理器"
+    ],
+    "is_not": [
+      "不判定原创性、不替代你的审美与判断",
+      "不替你写、不生成作品内容",
+      "不做版权/ plagiarism 审查、不做市场爆款承诺"
+    ],
+    "privacy": "所有数据留在本地数据目录（events.jsonl / profile.json / reports/），不上传、不联网"
+  }
+}

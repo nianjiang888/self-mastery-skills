@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "description": "知识源模板库：self-learn-agent 消化不同载体时建议的拆解方式与标签体系，供 ingest 复用。",
+  "source_types": [
+    {
+      "type": "book",
+      "label": "书籍",
+      "template": "--source '《书名》' --title '第N章 章名' --concept '一句话核心概念' --note '你的消化' --tags '主题,方法'",
+      "chunking_advice": "按'章节→论点→论据/例子'三层拆；每章 3-8 个原子知识点。",
+      "example": "《认知心理学》第3章 -> 工作记忆容量有限 / 组块化 / 中央执行系统"
+    },
+    {
+      "type": "course",
+      "label": "课程/视频",
+      "template": "--source '课程名(讲师)' --title '模块N' --concept '关键术语/模型' --note '笔记' --tags '主题'",
+      "chunking_advice": "按'课时→知识点→误区'拆；配合回看时间戳定位。",
+      "example": "MIT 6.001 -> 递归三要素 / 尾递归优化 / 惰性求值"
+    },
+    {
+      "type": "paper",
+      "label": "论文",
+      "template": "--source '作者(年份) 标题' --title '方法/实验' --concept '核心结论' --note '局限与启发' --tags '领域'",
+      "chunking_advice": "按'问题→假设→方法→结果→推论'拆；保留可复现细节。",
+      "example": "Karpicke & Roediger (2008) -> 测试效应 80% vs 36%"
+    },
+    {
+      "type": "experience",
+      "label": "经验/复盘",
+      "template": "--source '项目名/事件' --title '阶段' --concept '可复用的教训' --note '当时怎么做、下次怎么改' --tags '复盘'",
+      "chunking_advice": "按'情境→行动→结果→原则'拆；强调可迁移的模式。",
+      "example": "上线事故 -> 灰度先小流量 / 监控先于告警"
+    }
+  ],
+  "tag_vocabulary": [
+    "记忆", "认知", "负荷", "方法", "领域-数学", "领域-编程", "领域-产品",
+    "语言", "复盘", "模型", "误区", "案例"
+  ],
+  "quality_checks": [
+    "concept 必须是可独立回忆的原子点，而非整章标题。",
+    "note 必须用自己的话，避免照抄原文（费曼/自我解释原则）。",
+    "标签从 tag_vocabulary 选取，保持跨源可聚合以便 interleave。"
+  ]
+}

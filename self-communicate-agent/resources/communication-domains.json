@@ -1,0 +1,90 @@
+{
+  "version": "2.0.0",
+  "note": "self-communicate-agent 的指标口径、弱项规则、退出码与边界声明。机器可读，供 agent 与人共同参照。",
+
+  "scene": {
+    "field": "scene",
+    "choices": ["谈判", "汇报", "请求", "反馈", "冲突", "日常", "亲密"],
+    "desc": "对话情境"
+  },
+  "counterpart": {
+    "field": "counterpart",
+    "choices": ["上级", "客户", "同事", "家人", "朋友", "陌生人"],
+    "desc": "对话对象类型"
+  },
+  "goal": {
+    "field": "goal",
+    "choices": ["达成", "关系", "信息", "情绪"],
+    "desc": "这次对话你想要什么。目标设错是常见的隐性失败"
+  },
+  "reaction": {
+    "field": "reaction",
+    "choices": ["合作", "中立", "防御", "对抗"],
+    "desc": "对方的反应。防御=自我保护，对抗=反击"
+  },
+  "layer": {
+    "field": "layer",
+    "choices": ["事实", "情绪", "身份"],
+    "desc": "卡在哪一层。留空由引擎按 身份>情绪>事实 优先级推断"
+  },
+
+  "scales": {
+    "outcome": {"min": 1, "max": 5, "desc": "结果满意度，必填"},
+    "tone": {"min": 1, "max": 10, "desc": "我的情绪强度，>=7 为高强度"},
+    "listened": {"min": 1, "max": 5, "desc": "我的倾听程度"},
+    "aftermath": {"min": -2, "max": 2, "desc": "事后关系变化"}
+  },
+
+  "weak_spot_rules": [
+    {"id": "relationship_debt", "severity": "高",
+     "cond": "avg_aftermath < 0",
+     "action": "任何对话结束后加一句关系修复：先认可对方这个人，再谈事"},
+    {"id": "high_confront", "severity": "高",
+     "cond": "confront_rate >= 20%",
+     "action": "冲突前先降温：说事实不带评判、承认对方情绪、把立场换成利益"},
+    {"id": "identity_conflict", "severity": "高",
+     "cond": "identity_rate >= 40% 且 样本 >= 5",
+     "action": "把「你不对」换成「我的理解是」，保护对方的自我形象"},
+    {"id": "emotion_cost", "severity": "中",
+     "cond": "emotion_cost <= -1.0",
+     "action": "定硬规则：情绪强度到 7 就暂停，改约时间"},
+    {"id": "low_listen", "severity": "中",
+     "cond": "avg_listened < 2.5",
+     "action": "练一个动作：复述对方的意思，确认对了再表达自己"},
+    {"id": "high_defense", "severity": "中",
+     "cond": "defense_rate >= 40% 且 样本 >= 5",
+     "action": "把陈述句改成问句，降低威胁感（SCARF 模型）"},
+    {"id": "weakest_scene", "severity": "中",
+     "cond": "最弱场景（样本>=2）的平均达成 <= 2.5",
+     "action": "针对该场景单独准备话术模板，跑 script 拿结构化说法"},
+    {"id": "relation_drain", "severity": "中",
+     "cond": "某对象（样本>=2）的 aftermath < 0",
+     "action": "下一次与该对象的对话，目标只设成「关系」而不是「达成」"},
+    {"id": "thin_sample", "severity": "低",
+     "cond": "记录数 < 5",
+     "action": "继续记录到 5 条以上，模式识别才有统计意义"},
+    {"id": "no_script", "severity": "低",
+     "cond": "话术沉淀率 < 30% 且 样本 >= 5",
+     "action": "每次复盘至少写一句「下次我想这么说」"}
+  ],
+
+  "exit_codes": {
+    "0": "正常，或仅有低严重度提醒",
+    "1": "存在中或高严重度的沟通模式，值得介入",
+    "2": "用法错误（未知子命令、参数不合法）",
+    "4": "参数或数据不可用（缺 outcome、数值越界、找不到 id、话术库缺失）",
+    "note": "退出码 1 只对中/高严重度触发，低严重度仅作温和提醒，避免报警疲劳。"
+  },
+
+  "boundary": {
+    "is": ["量化沟通结果的结构性工具", "识别反复出现的沟通模式", "提供带出处的结构化话术模板"],
+    "is_not": [
+      "不做心理治疗、不做临床诊断",
+      "不替你判断谁对谁错",
+      "不做职场政治或权力博弈的建议",
+      "不存储他人的隐私信息——words 字段只记你自己的话",
+      "涉及持续的关系暴力、职场霸凌、家庭暴力，请寻求专业帮助，本工具不适用"
+    ],
+    "privacy": "所有记录存在本地数据目录，不上传、不联网。建议 words 字段只写自己的原话，不记录对方的私人信息。"
+  }
+}
